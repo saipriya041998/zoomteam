@@ -1,0 +1,142 @@
+<div class="container-fluid">
+  <div  class="text1">
+    <label>ARTICLE DISPLAY</label>
+    <label class="pull-right"><button class="btn btn-warning btn-sm" (click)="openAddPopup(Addpopup)">Add Article</button></label>
+  </div>
+<div class="panel panel-default">
+    <div class="panel-heading"><B></B></div>
+    <table class="table">
+      <thead>
+          <th>Article Id</th>
+          <th>Article Name</th>
+          <!-- <th>Content</th>
+          <th>Preview content</th> -->
+          <th>CategoryId</th>
+          <th>Category Name</th>
+          <!-- <th>Created By</th> -->
+          <th>Created By Name</th>
+          <th>Created Date</th>
+          <!-- <th>Modified By</th> -->
+          <!-- <th>Modified By Name</th>
+          <th>Modified Date</th> -->
+          <th>Action</th>
+          <!-- <th>Action</th> -->
+      </thead>
+      <tbody *ngFor="let item of all_articles;let i=index">
+          <tr>
+              <td>{{item.articleId}}</td>
+              <td>{{item.articleName}}</td>
+              <!-- <td [innerHTML]="item.content"></td>
+              <td [innerHTML]="item.previewContent"></td> -->
+              <td>{{item.categoryId}}</td>
+              <td>{{item.categoryName}}</td>
+              <!-- <td>{{item.createdBy}}</td> -->
+              <td>{{item.createdByName}}</td>
+              <td>{{item.createdDate}}</td>
+              <!-- <td>{{item.modifiedBy}}</td> -->
+              <!-- <td>{{item.modifiedByName}}</td>
+              <td>{{item.modifiedDate}}</td> -->
+              <td> <button class="btn btn-primary btn-sm" (click)="openEditPopup(Editpopup,i)" ><i class="fa fa-pencil"></i>Edit</button></td>
+              <td><button class="btn btn-secondary btn-sm" (click)="onReadMore(Readmore,i)" >Read More</button></td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #Addpopup let-modal>
+  <br>
+<form [formGroup]="kb" class="container" (ngSubmit)="ArticleSave()">
+    <h4>Add Article</h4>
+  <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-sm-4 col-md-6">
+            <label><b>ARTICLE_NAME</b></label>
+            <input formControlName="articleName" type="text" class="form-control">
+          </div>
+        </div>
+        </div>
+        <div class="container">
+              <div class="row">
+                <div class="col-xs-6 col-sm-4 col-md-6">
+                    <label><b>CATEGORY</b></label>
+                    <input formControlName="categoryId" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+        <div class="container">
+                  <div class="row">
+                      <div class="col-xs-6 col-sm-4 col-md-6">
+                        <label><b>CONTENT</b></label>
+                        <input formControlName="content" type="text"  class="form-control">
+                      </div>
+                    </div>
+                  </div>
+            <br>
+<div class="container">
+  <div class="row">
+      <div class="col-xs-6 col-sm-4 col-md-6">
+          <button class="btn btn-primary" type="submit">Submit</button>&nbsp;&nbsp;
+          <button class="btn btn-warning" type="button" (click)="modal.close('Cross Click')">close</button>
+        </div>
+  </div>
+</div><br>
+<br>
+  </form>
+</ng-template>
+
+
+
+<!-- edit popup -->
+
+<ng-template #Editpopup let-modal>
+  <br>
+  <form [formGroup]="kb" class="container" (ngSubmit)="UpdateArticles()">
+      <h4>Edit Article</h4>
+    <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-6">
+              <label><b>ARTICLE_NAME</b></label>
+              <input formControlName="articleName" type="text" class="form-control">
+            </div>
+          </div>
+          </div>
+
+              <div class="container">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-4 col-md-6">
+                      <label><b>CATEGORY</b></label>
+                      <input formControlName="categoryId" type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-md-6">
+                          <label><b>CONTENT</b></label>
+                          <input formControlName="content" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+              <br>
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-6">
+            <button class="btn btn-primary" type="submit">Submit</button>&nbsp;&nbsp;
+            <button class="btn btn-warning" type="button">close</button>
+
+          </div>
+    </div>
+  </div><br>
+  <br>
+    </form>
+  </ng-template>
+  <ng-template #Readmore let-modal>
+      <br>
+      <h1>Read More</h1>
+      <div *ngFor="let item of all_articles" class="container">
+       <p>{{item.articleName}}</p>
+       <p>{{item.previewContent}}</p>
+       <p>{{item.content}}</p>
+
+      </div>
+    </ng-template>
